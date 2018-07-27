@@ -1,4 +1,5 @@
 require "safe_yaml/load"
+require "pathname"
 
 module YAML
   def self.load_with_options(yaml, *original_arguments)
@@ -54,7 +55,7 @@ module YAML
     private
     def filename_and_options_from_arguments(arguments)
       if arguments.count == 1
-        if arguments.first.is_a?(String)
+        if arguments.first.is_a?(String) || arguments.first.is_a?(Pathname)
           return arguments.first, {}
         else
           return nil, arguments.first || {}
